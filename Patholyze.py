@@ -7,7 +7,7 @@ from st_clickable_images import clickable_images
 # ==========================================
 # UI CUSTOMIZATION & COLORS (CSS)
 # ==========================================
-st.set_page_config(page_title="Patholyze Pipeline", layout="wide")
+st.set_page_config(page_title="Patholyze Pipeline", layout="centered")
 
 st.markdown("""
 <style>
