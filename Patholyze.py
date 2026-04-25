@@ -241,12 +241,12 @@ elif st.session_state.step == 3:
     st.header("Step 3: Choose MIL Classifier")
     st.write("") 
     
-    if st.button("Attention MIL (AMIL) - Advanced", use_container_width=True):
+    if st.button("Attention MIL (AMIL)", use_container_width=True):
         st.session_state.classifier = "Attention MIL (AMIL)"
         set_step(4)
         st.rerun()
         
-    if st.button("Max-Pooling MIL - Baseline", use_container_width=True):
+    if st.button("Max-Pooling MIL", use_container_width=True):
         st.session_state.classifier = "Max-Pooling MIL"
         set_step(4)
         st.rerun()
