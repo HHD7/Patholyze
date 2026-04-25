@@ -15,7 +15,12 @@ st.markdown("""
     .stApp {
         background-color: #721165;
         background-image: linear-gradient(#721165, #ffffffa3);
-        zoom: 0.75;
+    }
+    /* SAFE BROWSER ZOOM EFFECT */
+    .block-container {
+        transform: scale(0.80);
+        transform-origin: top center;
+        max-width: 900px !important; 
     }
 
     /* 2. GENERAL TEXT COLOR */
