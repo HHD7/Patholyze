@@ -125,7 +125,7 @@ def show_result_popup(is_tumor):
         st.markdown(
             """
             <div style="background-color:#ff4b4b;padding:40px;border-radius:10px;text-align:center;">
-                <h1 style="color:white;font-size:50px;margin:0;">TUMOR DETECTED</h1>
+                <h1 style="color:white;font-size:50px;margin:0;">TUMOR</h1>
             </div>
             """, unsafe_allow_html=True
         )
@@ -133,7 +133,7 @@ def show_result_popup(is_tumor):
         st.markdown(
             """
             <div style="background-color:#00cc96;padding:40px;border-radius:10px;text-align:center;">
-                <h1 style="color:white;font-size:50px;margin:0;">NORMAL TISSUE</h1>
+                <h1 style="color:white;font-size:50px;margin:0;">NORMAL</h1>
             </div>
             """, unsafe_allow_html=True
         )
@@ -303,7 +303,7 @@ elif st.session_state.step == 4:
             st.markdown(
                 """
                 <div style="background-color:#ff4b4b;padding:40px;border-radius:10px;text-align:center;margin-top:20px;">
-                    <h1 style="color:white;font-size:50px;margin:0;">TUMOR DETECTED</h1>
+                    <h1 style="color:white;font-size:50px;margin:0;">TUMOR</h1>
                 </div>
                 """, unsafe_allow_html=True
             )
@@ -311,7 +311,7 @@ elif st.session_state.step == 4:
             st.markdown(
                 """
                 <div style="background-color:#00cc96;padding:40px;border-radius:10px;text-align:center;margin-top:20px;">
-                    <h1 style="color:white;font-size:50px;margin:0;">NORMAL TISSUE</h1>
+                    <h1 style="color:white;font-size:50px;margin:0;">NORMAL</h1>
                 </div>
                 """, unsafe_allow_html=True
             )
