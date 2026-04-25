@@ -15,6 +15,7 @@ st.markdown("""
     .stApp {
         background-color: #721165;
         background-image: linear-gradient(#721165, #ffffffa3);
+        zoom: 0.80;
     }
 
     /* 2. GENERAL TEXT COLOR */
@@ -49,6 +50,10 @@ st.markdown("""
     }
 
     /* 6. PROGRESS BAR COLOR */
+    /* This colors the empty background track */
+    .stProgress > div > div > div {
+        background-color: rgb(77, 77, 77) !important; 
+    }
     .stProgress > div > div > div > div {
         background-color: #ffffff !important; 
     }
