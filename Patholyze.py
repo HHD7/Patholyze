@@ -7,7 +7,7 @@ from st_clickable_images import clickable_images
 # ==========================================
 # UI CUSTOMIZATION & COLORS (CSS)
 # ==========================================
-st.set_page_config(page_title="Patholyze Pipeline", layout="centered")
+st.set_page_config(page_title="Patholyze Pipeline", layout="wide")
 
 st.markdown("""
 <style>
@@ -15,12 +15,6 @@ st.markdown("""
     .stApp {
         background-color: #721165;
         background-image: linear-gradient(#721165, #ffffffa3);
-    }
-    /* SAFE BROWSER ZOOM EFFECT */
-    .block-container {
-        transform: scale(0.80);
-        transform-origin: top center;
-        max-width: 900px !important; 
     }
 
     /* 2. GENERAL TEXT COLOR */
