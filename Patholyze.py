@@ -128,10 +128,22 @@ slides = [
         "patch": "NORMAL_C3L-02508-24_patch_grid.png",
     },
     {
+        "id": "2f2e5477-42a4-4906-a943-bf7f80_D1_D1",
+        "label": "TUMOR",
+        "wsi": "TUMOR_2f2e5477-42a4-4906-a943-bf7f80_D1_D1_wsi.png",
+        "patch": "TUMOR_2f2e5477-42a4-4906-a943-bf7f80_D1_D1_patch_grid.png",
+    },
+    {
         "id": "C3L-00001-21",
         "label": "TUMOR",
         "wsi": "TUMOR_C3L-00001-21_wsi.png",
         "patch": "TUMOR_C3L-00001-21_patch_grid.png",
+    },
+    {
+        "id": "C3L-00094-26",
+        "label": "NORMAL",
+        "wsi": "NORMAL_C3L-00094-26_wsi",
+        "patch": "NORMAL_C3L-00094-26_patch_grid.png",
     },
     {
         "id": "C3L-00083-21",
