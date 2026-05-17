@@ -96,6 +96,49 @@ def get_image_as_base64(file_path):
         return base64.b64encode(f.read()).decode()
 
 
+# ==========================================
+# SLIDES DATA
+# ==========================================
+slides = [
+    {
+        "id": "C3L-02219-26",
+        "label": "NORMAL",
+        "wsi": "NORMAL_C3L-02219-26_wsi.png",
+        "patch": "NORMAL_C3L-02219-26_patch_grid.png",
+    },
+    {
+        "id": "C3L-02350-26",
+        "label": "NORMAL",
+        "wsi": "NORMAL_C3L-02350-26_wsi.png",
+        "patch": "NORMAL_C3L-02350-26_patch_grid.png",
+    },
+    {
+        "id": "C3L-02508-24",
+        "label": "NORMAL",
+        "wsi": "NORMAL_C3L-02508-24_wsi.png",
+        "patch": "NORMAL_C3L-02508-24_patch_grid.png",
+    },
+    {
+        "id": "C3L-00001-21",
+        "label": "TUMOR",
+        "wsi": "TUMOR_C3L-00001-21_wsi.png",
+        "patch": "TUMOR_C3L-00001-21_patch_grid.png",
+    },
+    {
+        "id": "C3L-00083-21",
+        "label": "TUMOR",
+        "wsi": "TUMOR_C3L-00083-21_wsi.png",
+        "patch": "TUMOR_C3L-00083-21_patch_grid.png",
+    },
+    {
+        "id": "C3L-00093-21",
+        "label": "TUMOR",
+        "wsi": "TUMOR_C3L-00093-21_wsi.png",
+        "patch": "TUMOR_C3L-00093-21_patch_grid.png",
+    },
+]
+
+
 # --- SESSION STATE INITIALIZATION ---
 if 'step' not in st.session_state:
     st.session_state.step = 1
@@ -162,50 +205,45 @@ st.divider()
 # ==========================================
 if st.session_state.step == 1:
     st.header("Step 1: Select a Whole Slide Image")
-    
-    col1, col2 = st.columns(2)
-    
-    img1_theme = ((245, 200, 220), (210, 150, 180))
-    img2_theme = ((200, 220, 245), (150, 180, 210))
-    img1_b64 = get_image_as_base64("TUMOR_C3L-03987-23.png")
-    img2_b64 = get_image_as_base64("NORMAL_C3L-02164-26.png")
 
     square_img_style = {
-        "cursor": "pointer", 
-        "width": "100%", 
-        "aspect-ratio": "1 / 1", 
-        "object-fit": "cover", 
-        "border-radius": "0px", 
+        "cursor": "pointer",
+        "width": "100%",
+        "aspect-ratio": "1 / 1",
+        "object-fit": "cover",
+        "border-radius": "0px",
         "border": "none"
     }
-    
-    with col1:
-        
-        click1 = clickable_images(
-            [f"data:image/png;base64,{img1_b64}"],
-            div_style={"display": "flex", "justify-content": "center"},
-            img_style=square_img_style, 
-            key="slide1"
-        )
-        if click1 > -1:
-            st.session_state.selected_slide = "Slide 001"
-            st.session_state.slide_theme = img1_theme
-            set_step(2)
-            st.rerun()
-            
-    with col2:
-        
-        click2 = clickable_images(
-            [f"data:image/png;base64,{img2_b64}"],
-            div_style={"display": "flex", "justify-content": "center"},
-            img_style=square_img_style,
-            key="slide2"
-        )
-        if click2 > -1:
-            st.session_state.selected_slide = "Slide 002"
-            st.session_state.slide_theme = img2_theme
-            set_step(2)
-            st.rerun()
+
+    # Display slides in 2 columns
+    cols = st.columns(2)
+
+    for i, slide in enumerate(slides):
+        with cols[i % 2]:
+            img_b64 = get_image_as_base64(slide["wsi"])
+
+            click = clickable_images(
+                [f"data:image/png;base64,{img_b64}"],
+                div_style={"display": "flex", "justify-content": "center"},
+                img_style=square_img_style,
+                key=f"slide_{slide['id']}"
+            )
+
+            st.markdown(
+                f"""
+                <div style="text-align:center; margin-top:-10px; margin-bottom:25px;">
+                    <p style="font-size:18px; font-weight:bold;">{slide['label']} | {slide['id']}</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            if click > -1:
+                st.session_state.selected_slide = slide
+                st.session_state.processing_complete = False
+                st.session_state.show_popup = False
+                set_step(2)
+                st.rerun()
 
 # ==========================================
 # STEP 2: FEATURE EXTRACTOR
@@ -272,12 +310,11 @@ elif st.session_state.step == 4:
     image_placeholder = st.empty()
     status_text = st.empty()
     
-    if "001" in st.session_state.selected_slide:
-        raw_img_path = "TUMOR_C3L-03987-23.png"
-        patched_img_path = "C3L-03987-23_patch_map.png"
-    else:
-        raw_img_path = "NORMAL_C3L-02164-26.png"
-        patched_img_path = "C3L-02164-26_patch_map.png"
+    selected_slide = st.session_state.selected_slide
+
+    raw_img_path = selected_slide["wsi"]
+    patched_img_path = selected_slide["patch"]
+    is_tumor = selected_slide["label"] == "TUMOR"
 
     # --- THE ANIMATION PHASE ---
     if not st.session_state.processing_complete:
@@ -297,8 +334,6 @@ elif st.session_state.step == 4:
         image_placeholder.image(patched_img_path, caption="WSI Patching", use_container_width=True)
         status_text.markdown("### ✔ Running Complete!")
                 
-        is_tumor = "001" in st.session_state.selected_slide
-
         if st.session_state.show_popup:
             show_result_popup(is_tumor)
             st.session_state.show_popup = False 
