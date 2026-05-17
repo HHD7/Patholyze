@@ -140,10 +140,10 @@ slides = [
         "patch": "TUMOR_C3L-00001-21_patch_grid.png",
     },
     {
-        "id": "C3L-00094-26",
+        "id": "C3L-00140-26",
         "label": "NORMAL",
-        "wsi": "NORMAL_C3L-00094-26_wsi.png",
-        "patch": "NORMAL_C3L-00094-26_patch_grid.png",
+        "wsi": "NORMAL_C3L-00140-26_wsi.png",
+        "patch": "NORMAL_C3L-00140-26_patch_grid.png",
     },
     {
         "id": "C3L-00083-21",
