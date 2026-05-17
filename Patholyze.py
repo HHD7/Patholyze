@@ -72,20 +72,17 @@ st.markdown("""
         margin-bottom: -15px; 
     }
 
-    /* 9. IMAGE MOVEMENT */
-    [data-testid="column"], [data-testid="stColumn"] {
-        position: relative;
-    }
-
-    [data-testid="column"] iframe,
-    [data-testid="stColumn"] iframe {
+     /* 9. IMAGE MOVEMENT - only the hovered image moves */
+    [data-testid="stColumn"] iframe,
+    [data-testid="column"] iframe {
         transition: transform 0.3s ease !important;
     }
 
-    [data-testid="column"]:hover iframe,
-    [data-testid="stColumn"]:hover iframe {
+    [data-testid="stColumn"] iframe:hover,
+    [data-testid="column"] iframe:hover {
         transform: translateY(-6px) scale(1.02) !important;
     }
+    
 </style>
 """, unsafe_allow_html=True)
 
@@ -100,6 +97,18 @@ def get_image_as_base64(file_path):
 # SLIDES DATA
 # ==========================================
 slides = [
+    {
+        "id": "C3L-03987-23",
+        "label": "TUMOR",
+        "wsi": "TUMOR_C3L-03987-23.png",
+        "patch": "C3L-03987-23_patch_map.png",
+    },
+    {
+        "id": "C3L-02164-26",
+        "label": "NORMAL",
+        "wsi": "NORMAL_C3L-02164-26.png",
+        "patch": "C3L-02164-26_patch_map.png",
+    },
     {
         "id": "C3L-02219-26",
         "label": "NORMAL",
@@ -215,31 +224,27 @@ if st.session_state.step == 1:
         "border": "none"
     }
 
-    # Display slides in 2 columns
-    cols = st.columns(2)
+    # Display slides in 3 columns
+    cols = st.columns(3)
 
     for i, slide in enumerate(slides):
-        with cols[i % 2]:
+        with cols[i % 3]:
             img_b64 = get_image_as_base64(slide["wsi"])
 
             click = clickable_images(
                 [f"data:image/png;base64,{img_b64}"],
-                div_style={"display": "flex", "justify-content": "center"},
+                div_style={
+                    "display": "flex",
+                    "justify-content": "center",
+                    "margin-bottom": "25px"
+                },
                 img_style=square_img_style,
                 key=f"slide_{slide['id']}"
             )
 
-            st.markdown(
-                f"""
-                <div style="text-align:center; margin-top:-10px; margin-bottom:25px;">
-                    <p style="font-size:18px; font-weight:bold;">{slide['label']} | {slide['id']}</p>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
             if click > -1:
                 st.session_state.selected_slide = slide
+                st.session_state.slide_theme = None
                 st.session_state.processing_complete = False
                 st.session_state.show_popup = False
                 set_step(2)
