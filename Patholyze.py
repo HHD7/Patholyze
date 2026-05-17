@@ -152,7 +152,7 @@ with col_logo:
     st.image("patholyze_logo.png", use_container_width=True) 
 
 with col_title:
-    st.markdown("<h1 style='margin-top: -10px; font-size: 60px;'>Patholyze</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='margin-top: -10px; font-size: 60px;'>PATHOLYZE</h1>", unsafe_allow_html=True)
 
 st.progress(st.session_state.step / 4) 
 st.divider()
