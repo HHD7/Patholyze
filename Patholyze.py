@@ -151,6 +151,12 @@ slides = [
         "wsi": "NORMAL_C3L-02164-27.png",
         "patch": "C3L-02164-27_patch_map.png",
     },
+    {
+        "id": "C3L-00415-21",
+        "label": "TUMOR",
+        "wsi": "TUMOR_C3L-00415-21.png",
+        "patch": "C3L-00415-21_patch_map.png",
+    },
 ]
 
 
