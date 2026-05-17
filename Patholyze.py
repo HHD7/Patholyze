@@ -142,7 +142,7 @@ slides = [
     {
         "id": "C3L-00094-26",
         "label": "NORMAL",
-        "wsi": "NORMAL_C3L-00094-26_wsi",
+        "wsi": "NORMAL_C3L-00094-26_wsi.png",
         "patch": "NORMAL_C3L-00094-26_patch_grid.png",
     },
     {
